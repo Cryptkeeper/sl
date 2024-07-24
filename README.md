@@ -23,7 +23,7 @@ For specific usage details of the C API, see [sl.h](src/sl.h).
 
 ### Customizing
 
-You may override the `realloc`, `free`, and `strdup` calls made internally by defining `SL_OVERRIDE` and then defining each of the follow macros:
+You may override the `realloc`, `free`, and `strdup` calls made internally by defining `SL_OVERRIDE` and then defining each of the following macros:
 
 - `SLX_REALLOC`
 - `SLX_FREE`

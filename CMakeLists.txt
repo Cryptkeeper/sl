@@ -16,3 +16,8 @@ if (M4)
 else ()
     message(WARNING "m4 not found, sl.h will not be generated")
 endif ()
+
+enable_testing()
+
+add_executable(sl_test src/sl_test.c src/sl.c)
+add_test(NAME sl_test COMMAND sl_test)
