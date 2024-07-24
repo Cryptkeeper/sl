@@ -9,14 +9,14 @@
 #define SLX_STRDUP strdup
 #endif
 
-int sladd(slist_t **p, const char *str) {
+int sladd(slist_t **sl, const char *str) {
   slist_t *r = NULL;
-  const long c = slcount(*p);
-  if ((r = SLX_REALLOC(*p, (c + 2) * sizeof(char *))) == NULL ||
+  const long c = slcount(*sl);
+  if ((r = SLX_REALLOC(*sl, (c + 2) * sizeof(char *))) == NULL ||
       (r[c] = SLX_STRDUP(str)) == NULL)
     return -1;
   r[c + 1] = NULL;
-  *p = r;
+  *sl = r;
   return 0;
 }
 
