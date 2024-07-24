@@ -1,4 +1,6 @@
+#ifndef SL_IMPL_NO_INCLUDE
 #include "sl.h"
+#endif
 
 #ifndef SL_OVERRIDE
 #include <stdlib.h> /* for free, realloc, NULL */

@@ -9,6 +9,7 @@ include(`src/sl.h')
 #ifdef SL_IMPL
 #ifndef SL_IMPL_ONCE
 #define SL_IMPL_ONCE
+#define SL_IMPL_NO_INCLUDE
 #line 1 "sl.c"
 include(`src/sl.c')
 #endif // SL_IMPL_ONCE
