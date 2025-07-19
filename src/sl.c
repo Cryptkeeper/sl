@@ -11,37 +11,41 @@
 #define SLX_STRDUP strdup
 #endif
 
-int sladd(slist_t **sl, const char *str) {
-  slist_t *r = NULL;
-  const long c = slcount(*sl);
-  if ((r = SLX_REALLOC(*sl, (c + 2) * sizeof(char *))) == NULL ||
-      (r[c] = SLX_STRDUP(str)) == NULL)
+int sladd(slist_t *sl, const char *str) {
+  if (sl->len + 1 >= sl->cap) {
+    const long newcap = sl->cap == 0 ? 4 : (long)((double)sl->cap * 1.5);
+    char **r;
+    if ((r = SLX_REALLOC(sl->strings, (newcap + 1) * sizeof(char *))) == NULL)
+      return -1;
+    sl->strings = r;
+    sl->cap = newcap;
+  }
+  if ((sl->strings[sl->len] = SLX_STRDUP(str)) == NULL)
     return -1;
-  r[c + 1] = NULL;
-  *sl = r;
+  sl->strings[++sl->len] = NULL;
   return 0;
 }
 
 void slfree(slist_t *sl) {
+  if (sl == NULL)
+    return;
   long i;
-  for (i = 0; sl != NULL && sl[i] != NULL; i++)
-    SLX_FREE(sl[i]);
-  SLX_FREE(sl);
+  for (i = 0; sl->strings != NULL && sl->strings[i] != NULL; i++)
+    SLX_FREE(sl->strings[i]);
+  SLX_FREE(sl->strings);
+  sl->strings = NULL;
+  sl->len = sl->cap = 0;
 }
 
 char *slpop(slist_t *sl) {
-  const long c = slcount(sl);
-  char *r = NULL;
-  if (c == 0)
+  if (sl == NULL || sl->len == 0)
     return NULL;
-  r = sl[c - 1];
-  sl[c - 1] = NULL;
-  return r;
+  sl->len--;
+  char *const str = sl->strings[sl->len];
+  sl->strings[sl->len] = NULL;
+  return str;
 }
 
 long slcount(const slist_t *sl) {
-  long c = 0;
-  for (; sl != NULL && sl[c] != NULL; c++)
-    ;
-  return c;
+  return sl != NULL ? sl->len : 0;
 }

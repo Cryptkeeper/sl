@@ -1,14 +1,13 @@
 # sl
 
-This is one more single-header C99* string list library. It is intended for:
+This is one more single-header C99 string list library. It is intended for:
 
 - LIFO queue usage (last-in-first-out)
-- Situations that don't need better performance than `realloc` calls and O(n) counting
+- Situations that don't need better performance than `realloc` calls ~and O(n) counting~
+- Folks who want a bring-your-own-allocator solution
 - Those who like BSD's [stringlist.h](https://man.freebsd.org/cgi/man.cgi?query=stringlist&apropos=0&sektion=3&manpath=FreeBSD+11-current&format=html) and wish they had a worse, (potentially) more portable version
 - Those who haven't already copy/pasted [stb_ds.h](https://github.com/nothings/stb/blob/master/stb_ds.h)
 - People who enjoy the risk of NULL terminated data structures
-
-\* *C90 if you don't mind the single-line comments*
 
 ## Usage
 
