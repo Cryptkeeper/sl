@@ -7,6 +7,7 @@
 #define SL_IMPL_NO_INCLUDE
 #line 1 "sl.h"
 include(`src/sl.h')
+#endif // SL_SINGLEFILE_H
 #ifdef SL_IMPL
 #ifndef SL_IMPL_ONCE
 #define SL_IMPL_ONCE
@@ -14,4 +15,3 @@ include(`src/sl.h')
 include(`src/sl.c')
 #endif // SL_IMPL_ONCE
 #endif // SL_IMPL
-#endif // SL_SINGLEFILE_H
